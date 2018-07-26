@@ -6,6 +6,10 @@ FROG uses files in the *.mtx format that have been converted to *.bin
 To switch within different methods, you must alter the algorithms *.cu file 
 and comment out//in the desired method, located at the end of each file.
 
+To make frog and the required "exp" file you should run the "make" command in:
+
+     ../Frog/src/
+
 To run small graph files, copy all the files from "process-small" folder 
 into the "src" folder and run the "make" command. After making the "exp" file
 you can run the program with:
