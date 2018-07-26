@@ -250,7 +250,7 @@ static void gpu_pr_atomic(
 	} while(flag != 0 && step < 10);
 	// Copy Back Values
 	CudaMemcpyD2H(values, dev_value, vertex_num * sizeof(float));
-	printf("\t%.2f\t%.2f\tpagerank_edge_loop\tstep=%d\t\n",
+	printf("\t%.2f\t%.2f\tpagerank_edge_loop\tstep=%d\n",
 			timer_stop(), totalTime, step);
 	/*
 	printf("\tvalues:");
@@ -334,7 +334,7 @@ static void gpu_pr_navie(
 	} while(flag != 0 && step < 20);
 	// Copy Back Values
 	CudaMemcpyD2H(values, dev_value, vertex_num * sizeof(float));
-	printf("\t%.2f\t%.2f\tpagerank_vertex_loop\tstep=%d\t\n",
+	printf("\t%.2f\t%.2f\tpagerank_vertex_loop\tstep=%d\n",
 			timer_stop(), totalTime, step);
 	/*
 	printf("\tvalues:");
@@ -433,7 +433,7 @@ void pr_experiments(
 		const Graph * const g
 		)
 {
-	printf("-------------------------------------------------------------------\n");
+	printf("\n-------------------------------------------------------------------\n");
 	//reverse the graph
 	const Graph * r =get_reverse_graph(g);
 	// partition on the Graph
@@ -480,14 +480,10 @@ void pr_experiments(
 	get_degree(g,in_degree,out_degree);
     printf("\tTime\tTotal\tTips\n");
 
-    //cpu_pagerank(g,value_cpu);
-	/*
-	   printf("\n");
-	   gpu_pr_atomic(part_r, t,out_degree, value_gpu);
-	   check_values(value_gpu,value_cpu,g->vertex_num);
-
-	 */
-	gpu_pr_navie(part_r,t,out_degree, value_gpu);
-	//check_values(value_gpu,value_cpu,g->vertex_num);
+        cpu_pagerank(g,value_cpu);
+	gpu_pr_atomic(part_r, t,out_degree, value_gpu);
+	check_values(value_gpu,value_cpu,g->vertex_num);
+	   //gpu_pr_navie(part_r,t,out_degree, value_gpu);
+	   //check_values(value_gpu,value_cpu,g->vertex_num);
 
 }
