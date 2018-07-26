@@ -86,7 +86,7 @@ static void cc_on_cpu(
 	// Calculating final values
 	for (int i = 0; i < vertex_num; i++)
 		Find(values, i);
-	printf("\t%.2f\tCC on CPU\n", timer_stop());
+	printf("\t%.2f\tcc_on_cpu\n", timer_stop());
 }
 
 // CC Kernel on edges with inner loops
@@ -155,7 +155,7 @@ static void gpu_cc_edge_loop(const Graph * const g, int * const values) {
 	} while(flag != 0 && step < 500);
 	// Copy Back Values
 	CudaMemcpyD2H(values, dev_value, vertex_num * sizeof(int));
-	printf("\t%.2f\t%.2f\tcc_edge_loop\tstep=%d\t\n",
+	printf("\t%.2f\t%.2f\tcc_edge_loop\tstep=%d\n",
 			execTime, timer_stop(), step);
 }
 
@@ -228,7 +228,7 @@ static void gpu_cc_edge_part_loop(
 	// Copy Back Values
 	CudaMemcpyD2H(values, dev_value, t->vertex_num * sizeof(int));
 	//printf("ccTime = %.2f ms, transTime = %.2fms\n", ccTime, transTime);
-	printf("\t%.2f\t%.2f\tpart_cc_edge_loop\tstep=%d\t\n",
+	printf("\t%.2f\t%.2f\tpart_cc_edge_loop\tstep=%d\n",
 			ccTime, timer_stop(), step);
 }
 
@@ -429,24 +429,20 @@ void cc_experiments(const Graph * const g,int size) {
 
 	printf("\tTime\tTotal\tTips\n");
 
-	//cc_on_cpu(g->vertex_num, g->vertex_begin, g->edge_dest, value_cpu);
-	//report_cc_values(value_cpu, g->vertex_num);
+	cc_on_cpu(g->vertex_num, g->vertex_begin, g->edge_dest, value_cpu);
+	report_cc_values(value_cpu, g->vertex_num);
+	   //gpu_cc_edge_loop(g, value_gpu);
+	   //check_values(value_cpu, value_gpu, g->vertex_num);
+	   //gpu_cc_edge_part_loop(part, t, value_gpu,size);
+	   //check_values(value_cpu, value_gpu, g->vertex_num);
+	gpu_cc_vertex(g, value_gpu);
+	check_values(value_cpu, value_gpu, g->vertex_num);
+	   //gpu_cc_vertex_part(part, t, value_gpu);
+	   //check_values(value_cpu, value_gpu, g->vertex_num);
 
-	//gpu_cc_edge_loop(g, value_gpu);
-	//check_values(value_cpu, value_gpu, g->vertex_num);
-	gpu_cc_edge_part_loop(part, t, value_gpu,size);
-	//check_values(value_cpu, value_gpu, g->vertex_num);
-
-	/*
-	   gpu_cc_vertex(g, value_gpu);
-	   check_values(value_cpu, value_gpu, g->vertex_num);
-	   gpu_cc_vertex_part(part, t, value_gpu);
-	   check_values(value_cpu, value_gpu, g->vertex_num);
-	 */
 	release_table(t);
 	for (int i = 0; i < PAR_NUM; i++) release_graph(part[i]);
 	free(part);
 	free(value_cpu);
 	free(value_gpu);
 }
-
