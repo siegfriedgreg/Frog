@@ -1,24 +1,25 @@
 FROG uses files in the *.mtx format that have been converted to *.bin
+*** the converter can be found in a zip file in the "data" folder.
 
      graph.mtx -> graph.mtx.bin 
 
 To switch within different methods, you must alter the algorithms *.cu file 
 and comment out//in the desired method, located at the end of each file.
 
-running "make" in the "src" folder, will create a "exp" file for execution of FROG.
-example:
+To run small graph files, copy all the files from "process-small" folder 
+into the "src" folder and run the "make" command. After making the "exp" file
+you can run the program with:
 
       ./exp [graph location]
 
-If you are running large graph files and are getting memory error messages, then
-copy the files from the big-data folder up into the "src" folder and "make" again.
-
-      /frog/src/big-data-process -> /frog/src/
-      
-To run with the large graph files, you need to specify and adjust the buffer size
-so that the gpu memory is utilized more effeciently. The larger the buffer size the better.
+To run large graph files, copy all the files from "process-large" folder 
+into the "src" folder and run the "make" command. After making the "exp" file
+you can run the program with:
 
       ./exp [graph location] [buffer size]
+      
+ where buffer size is the best fit for the gpu memory available.
+ *** buffer size is a trial and error value.
       
 more to come...
  
