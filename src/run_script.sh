@@ -4,8 +4,8 @@
 #SBATCH -t 1:00:00
 #SBATCH --gres=gpu:k80:4
 
-./exp ../../maps/gh012.mtx.bin
-./exp ../../maps/gh001.mtx.bin
+# ./exp ../[graph location]/***.mtx.bin                   <-- SMALL GRAPH SIZES
+# ./exp ../[graph location]/***.mtx.bin [buffer size]     <-- LARGE GRAPH SIZES
 
 exit
 
