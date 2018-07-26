@@ -142,7 +142,7 @@ static void gpu_sssp_edge_loop(
     // Copy Back Values
     CudaMemcpyD2H(dist, dev_dist, vertex_num * sizeof(int));
     CudaMemcpyD2H(path, dev_path, vertex_num * sizeof(int));
-    printf("\t%.2f\t%.2f\tsssp_edge_loop\tstep=%d\t",
+    printf("\t%.2f\t%.2f\tsssp_edge_loop\tstep=%d\n",
            execTime, timer_stop(), step - 1);
 }
 
@@ -206,7 +206,7 @@ static void gpu_sssp_edge_part_loop(
     // Copy Back Values
     CudaMemcpyD2H(dist, dev_dist, t->vertex_num * sizeof(int));
     CudaMemcpyD2H(path, dev_path, t->vertex_num * sizeof(int));
-    printf("\t%.2f\t%.2f\tsssp_edge_part_loop\tstep=%d\t",
+    printf("\t%.2f\t%.2f\tsssp_edge_part_loop\tstep=%d\n",
            execTime, timer_stop(), step - 1);
 }
 
@@ -291,7 +291,7 @@ static void gpu_sssp_vertex(
     // Copy Back Values
     CudaMemcpyD2H(dist, dev_dist, vertex_num * sizeof(int));
     CudaMemcpyD2H(path, dev_path, vertex_num * sizeof(int));
-    printf("\t%.2f\t%.2f\tsssp_vertex\tstep=%d\t",
+    printf("\t%.2f\t%.2f\tsssp_vertex\tstep=%d\n",
             execTime, timer_stop(), step);
 }
 
@@ -390,13 +390,13 @@ static void gpu_sssp_vertex_part(
     // Copy Back Values
     CudaMemcpyD2H(dist, dev_dist, t->vertex_num * sizeof(int));
     CudaMemcpyD2H(path, dev_path, t->vertex_num * sizeof(int));
-    printf("\t%.2f\t%.2f\tsssp_vertex_part\tstep=%d\t",
+    printf("\t%.2f\t%.2f\tsssp_vertex_part\tstep=%d\n",
            execTime, timer_stop(), step - 1);
 }
 
 void sssp_experiments(const Graph * const g) {
 
-    printf("-------------------------------------------------------------------\n");
+    printf("\n-------------------------------------------------------------------\n");
     // partition on the Graph
     printf("Partitioning ... ");
     timer_start();
@@ -441,20 +441,17 @@ void sssp_experiments(const Graph * const g) {
     }
 
     printf("\tTime\tTotal\tTips\n");
-    sssp_on_cpu(g->vertex_num, g->vertex_begin, g->edge_dest, edge_weight,
-                SOURCE_VERTEX, value_cpu, path);
-/*
-    gpu_sssp_edge_loop(g, edge_weight, SOURCE_VERTEX, value_gpu, path);
-    check_values(value_cpu, value_gpu, g->vertex_num);
-    */
-	gpu_sssp_edge_part_loop(part, t, part_weight, SOURCE_VERTEX, value_gpu, path);
-    check_values(value_cpu, value_gpu, g->vertex_num);
-/*
+
+    sssp_on_cpu(g->vertex_num, g->vertex_begin, g->edge_dest, edge_weight, SOURCE_VERTEX, value_cpu, path);
+       //gpu_sssp_edge_loop(g, edge_weight, SOURCE_VERTEX, value_gpu, path);
+       //check_values(value_cpu, value_gpu, g->vertex_num);
+       //gpu_sssp_edge_part_loop(part, t, part_weight, SOURCE_VERTEX, value_gpu, path);
+       //check_values(value_cpu, value_gpu, g->vertex_num);
     gpu_sssp_vertex(g, edge_weight, SOURCE_VERTEX, value_gpu, path);
     check_values(value_cpu, value_gpu, g->vertex_num);
-  	gpu_sssp_vertex_part(part, t, part_weight, SOURCE_VERTEX, value_gpu, path);
-    check_values(value_cpu, value_gpu, g->vertex_num);
-*/
+       //gpu_sssp_vertex_part(part, t, part_weight, SOURCE_VERTEX, value_gpu, path);
+       //check_values(value_cpu, value_gpu, g->vertex_num);
+
     release_table(t);
     for (int i = 0; i < 5; i++) release_graph(part[i]);
     free(part);
