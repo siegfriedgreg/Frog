@@ -5,4 +5,6 @@ commenting out certain sections of code inorder to use the functions.
 
 running make will create a "exp" file for execution of FROG.
 
-more to come...
+example:
+
+      ./exp ../../graphs/***.mtx.bin
