@@ -429,14 +429,14 @@ void cc_experiments(const Graph * const g,int size) {
 
 	printf("\tTime\tTotal\tTips\n");
 
-	cc_on_cpu(g->vertex_num, g->vertex_begin, g->edge_dest, value_cpu);
-	report_cc_values(value_cpu, g->vertex_num);
+	   //cc_on_cpu(g->vertex_num, g->vertex_begin, g->edge_dest, value_cpu);
+	   //report_cc_values(value_cpu, g->vertex_num);
 	   //gpu_cc_edge_loop(g, value_gpu);
 	   //check_values(value_cpu, value_gpu, g->vertex_num);
-	   //gpu_cc_edge_part_loop(part, t, value_gpu,size);
-	   //check_values(value_cpu, value_gpu, g->vertex_num);
-	gpu_cc_vertex(g, value_gpu);
+	gpu_cc_edge_part_loop(part, t, value_gpu,size);
 	check_values(value_cpu, value_gpu, g->vertex_num);
+	   //gpu_cc_vertex(g, value_gpu);
+	   //check_values(value_cpu, value_gpu, g->vertex_num);
 	   //gpu_cc_vertex_part(part, t, value_gpu);
 	   //check_values(value_cpu, value_gpu, g->vertex_num);
 
