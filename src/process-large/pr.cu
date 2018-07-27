@@ -499,7 +499,7 @@ void pr_experiments(
 	get_degree(g,in_degree,out_degree);
 	printf("\tTime\tTotal\tTips\n");
 
-	cpu_pagerank(g,value_cpu);
+	   //cpu_pagerank(g,value_cpu);
 	   //gpu_pr_navie(part_r,t,out_degree, value_gpu);
 	   //check_values(value_gpu,value_cpu,g->vertex_num);
 	gpu_pr_atomic(part_r, t,out_degree, value_gpu,size);
