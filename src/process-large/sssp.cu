@@ -464,13 +464,14 @@ void sssp_experiments(const Graph * const g, int size) {
 	}
 
 	printf("\tTime\tTotal\tTips\n");
-	sssp_on_cpu(g->vertex_num, g->vertex_begin, g->edge_dest, edge_weight,SOURCE_VERTEX, value_cpu, path);
+	
+	   //sssp_on_cpu(g->vertex_num, g->vertex_begin, g->edge_dest, edge_weight,SOURCE_VERTEX, value_cpu, path);
 	   //gpu_sssp_edge_loop(g, edge_weight, SOURCE_VERTEX, value_gpu, path);
 	   //check_values(value_cpu, value_gpu, g->vertex_num);
-	   //gpu_sssp_edge_part_loop(part, t, part_weight, SOURCE_VERTEX, value_gpu, path,size);
-	   //check_values(value_cpu, value_gpu, g->vertex_num);
-	gpu_sssp_vertex(g, edge_weight, SOURCE_VERTEX, value_gpu, path);
+	gpu_sssp_edge_part_loop(part, t, part_weight, SOURCE_VERTEX, value_gpu, path,size);
 	check_values(value_cpu, value_gpu, g->vertex_num);
+	   //gpu_sssp_vertex(g, edge_weight, SOURCE_VERTEX, value_gpu, path);
+	   //check_values(value_cpu, value_gpu, g->vertex_num);
 	   //gpu_sssp_vertex_part(part, t, part_weight, SOURCE_VERTEX, value_gpu, path);
 	   //heck_values(value_cpu, value_gpu, g->vertex_num);
 
