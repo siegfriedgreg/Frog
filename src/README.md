@@ -23,7 +23,7 @@ To run large graph files, copy all the files from "process-large" folder
 into the "src" folder and run the "make" command. After making the "exp" file
 you can run the program with:
 
-      ./exp [graph location] [buffer size]
+      ./exp [graph location] [buffer size]  1024*1024 for one rec...
       
  where buffer size is the best fit for the gpu memory available.
  *** buffer size is a trial and error value.
