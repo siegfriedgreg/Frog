@@ -12,5 +12,6 @@ To run Frog:
 5)  "interact --gpu" and double check that the modules are still loaded; or you can run from an sbatch script.
 6)  to run with the large files you need to add a buffer size and tune depending on results. 
           ./exp [graph location] [buffer size] --> ./exp ../../maps/graph.mtx.bin 1048576
-          * the value 1048576 is (1024*1024) and can be adjusted depending on memory available to gpu and testing results.
+
+* the value 1048576 is (1024*1024) and can be adjusted depending on memory available to gpu and testing results.
 
