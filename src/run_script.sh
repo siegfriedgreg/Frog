@@ -7,6 +7,9 @@
 # ./exp ../[graph location]/***.mtx.bin                   <-- SMALL GRAPH SIZES
 # ./exp ../[graph location]/***.mtx.bin [buffer size]     <-- LARGE GRAPH SIZES
 
+#   ./exp ../../[graph location]/***.mtx.bin                  <-- SMALL RUN
+#   ./exp ../../[graph location]/***.mtx.bin 1048576          <-- LARGE RUN
+
 exit
 
 
