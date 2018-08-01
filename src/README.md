@@ -1,32 +1,16 @@
 FROG uses files in the *.mtx format that have been converted to *.bin 
-The converter can be found in a zip file in the "data" folder.
+The converter from .mtx to .bin can be found in a zip file in the "data" folder.
 
      graph.mtx -> graph.mtx.bin 
 
-To switch within different methods, you must alter the algorithms *.cu file 
-and comment out//in the desired method, located at the end of each file.
+To run Frog:
+1)  download or git into your directory.
+2)  load module gcc/5.3  and cuda/8.0
+3)  if you are doing small graph files pull out all of the files from the process-small folder; otherwise for simplicity, pull the files from process-large folder and put into the Frog/src folder.
+          from the Frog/src/process-large/ folder -->  cp *.cu ../
+4)  "make"  ( no errors but warnings will be present due mostly to commented out functions of definitions )
+5)  "interact --gpu" and double check that the modules are still loaded; or you can run from an sbatch script.
+6)  to run with the large files you need to add a buffer size and tune depending on results. 
+          ./exp [graph location] [buffer size] --> ./exp ../../maps/graph.mtx.bin 1048576
+          * the value 1048576 is (1024*1024) and can be adjusted depending on memory available to gpu and testing results.
 
-To make frog and the required "exp" file you should run the "make" command in:
-
-     ../Frog/src/
-    
-Errors will be generated with warnings due to commented methods not being used or
-" was declared but never referenced".
-
-To run small graph files, copy all the files from "process-small" folder 
-into the "src" folder and run the "make" command. After making the "exp" file
-you can run the program with:
-
-      ./exp [graph location]
-
-To run large graph files, copy all the files from "process-large" folder 
-into the "src" folder and run the "make" command. After making the "exp" file
-you can run the program with:
-
-      ./exp [graph location] [buffer size]  1024*1024 for one rec...
-      
- where buffer size is the best fit for the gpu memory available.
- *** buffer size is a trial and error value.
-      
-more to come...
- 
