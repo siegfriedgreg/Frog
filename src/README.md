@@ -1,4 +1,4 @@
-FROG uses files in the *.mtx format that have been converted to *.bin 
+FROG uses files in the *.mtx format that have been converted to *.bin \ 
 The converter from .mtx to .bin can be found in a zip file in the "data" folder.
 
      graph.mtx -> graph.mtx.bin 
